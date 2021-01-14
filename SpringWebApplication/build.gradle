@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'eclipse-wtp'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+ mavenCentral()
+}
+
+dependencies {
+providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+ compile 'org.springframework:spring-webmvc:5.1.8.RELEASE'
+ compile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
+ runtime 'javax.servlet:jstl:1.2'
+
+ def tomcatVersion = '8.0.53'
+ tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+ "org.apache.tomcat.embed:tomcat-embed-loggingjuli:${tomcatVersion}",
+ "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+buildscript {
+ repositories {
+ mavenCentral()
+ }
+ 
+ dependencies {
+ classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
+ }
+}
